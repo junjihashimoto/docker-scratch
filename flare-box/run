@@ -1,0 +1,7 @@
+#!/bin/sh
+
+flarei --daemonize -f /etc/flarei.conf 
+flared -f /etc/flared.conf &
+echo "node role localhost 12121 master 1 0" | nc localhost 12120
+wait
+
