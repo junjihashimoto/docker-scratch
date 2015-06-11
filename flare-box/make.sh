@@ -7,6 +7,7 @@ ldd /bin/sh > depends
 ldd /bin/echo >> depends
 ldd /bin/nc >> depends
 ldd /bin/sleep >> depends
+ldd /usr/bin/tail >> depends
 ldd ./flared >> depends
 ldd ./flarei >> depends
 
@@ -30,11 +31,14 @@ cp -L run root/usr/bin
 cp -L /bin/echo root/bin
 cp -L /bin/nc root/bin
 cp -L /bin/sleep root/bin
+cp -L /usr/bin/tail root/usr/bin
 
 mkdir -p root/etc
 cp -L flared.conf root/etc
 cp -L flarei.conf root/etc
 
 mkdir -p root/tmp
+mkdir -p root/dev
+touch root/dev/log
 
 tar cC root . | docker import -c "CMD /usr/bin/run" - flare-box:latest
